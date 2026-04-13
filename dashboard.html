@@ -6,123 +6,200 @@
   <title>Live Tracker – PuneRide</title>
   <link rel="stylesheet" href="style.css"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 </head>
 <body class="dashboard-body">
 
-<nav>
-  <div class="logo"><span class="logo-icon">🚌</span> PuneRide</div>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="dashboard.html" class="active">Live Tracker</a>
-    <a href="about.html">About</a>
-    <a href="help.html">Help</a>
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <span class="helpline">हेल्पलाइन क्रमांक: <strong>020-24546262</strong></span>
+    <div class="lang-switcher top-lang">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">English</button>
+      <button class="lang-btn" data-lang="hi" onclick="setLang('hi')">हिन्दी</button>
+      <button class="lang-btn" data-lang="mr" onclick="setLang('mr')">मराठी</button>
+    </div>
   </div>
-</nav>
+</div>
 
-<div class="tracker-layout">
+<!-- HEADER -->
+<header class="site-header dash-header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-logo">🚌</div>
+      <div class="brand-text">
+        <div class="brand-name">PuneRide</div>
+        <div class="brand-sub" data-i18n="hero_badge">PUNE CITY BUS — SMART ETA SYSTEM</div>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="dashboard.html" class="active" data-i18n="nav_tracker">Live Tracker</a>
+      <a href="about.html" data-i18n="nav_about">About</a>
+      <a href="help.html" data-i18n="nav_help">Help</a>
+    </nav>
+  </div>
+</header>
+
+<!-- DASHBOARD LAYOUT -->
+<div class="dash-layout">
 
   <!-- ===== LEFT PANEL ===== -->
-  <div class="left-panel" id="left-panel">
+  <div class="dash-left" id="left-panel">
 
-    <!-- STEP 1: Choose boarding stop -->
+    <!-- Panel header strip -->
+    <div class="panel-top-strip">
+      <span class="panel-top-icon">🗺️</span>
+      <span data-i18n="nav_tracker">Live Bus Tracker</span>
+    </div>
+
+    <!-- STEP 1: Board -->
     <div class="panel-section" id="section-board">
       <div class="step-header">
         <div class="step-badge">1</div>
-        <span>Where are you boarding?</span>
+        <span data-i18n="step1_title">Where are you boarding?</span>
       </div>
-
       <div class="search-wrap">
-        <input type="text" id="board-search" placeholder="Search bus stop name…" oninput="filterStops('board')" autocomplete="off"/>
-        <button class="gps-btn" onclick="useGPS()" title="Find nearest stop via GPS">📍 Use GPS</button>
+        <div class="search-input-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="board-search"
+            data-i18n="search_board" data-i18n-attr="placeholder"
+            placeholder="Search bus stop name…"
+            oninput="filterStops('board')" autocomplete="off"/>
+        </div>
+        <button class="gps-btn" id="gps-btn" onclick="useGPS()">
+          <span data-i18n="gps_btn">📍 GPS</span>
+        </button>
       </div>
-
-      <div class="stop-list" id="board-stop-list">
-        <!-- populated by JS -->
-      </div>
+      <div class="stop-list" id="board-stop-list"></div>
     </div>
 
-    <!-- STEP 2: Choose alighting stop -->
+    <!-- STEP 2: Alight -->
     <div class="panel-section hidden" id="section-alight">
       <div class="step-header">
         <div class="step-badge">2</div>
-        <span>Where are you going?</span>
+        <span data-i18n="step2_title">Where are you going?</span>
       </div>
-
-      <div class="selected-stop-row">
-        <div class="sel-dot" style="background:#e74c3c"></div>
-        <div>
-          <div class="sel-label">Boarding at</div>
-          <div class="sel-name" id="board-selected-name">—</div>
+      <div class="selected-stop-pill red">
+        <div class="pill-dot"></div>
+        <div class="pill-text">
+          <div class="pill-label" data-i18n="boarding_at">Boarding at</div>
+          <div class="pill-name" id="board-selected-name">—</div>
         </div>
-        <button class="change-btn" onclick="resetToStep1()">Change</button>
+        <button class="pill-change" onclick="resetToStep1()" data-i18n="change_btn">Change</button>
       </div>
-
       <div class="search-wrap" style="margin-top:12px">
-        <input type="text" id="alight-search" placeholder="Search destination stop…" oninput="filterStops('alight')" autocomplete="off"/>
+        <div class="search-input-wrap" style="flex:1">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="alight-search"
+            data-i18n="search_alight" data-i18n-attr="placeholder"
+            placeholder="Search destination stop…"
+            oninput="filterStops('alight')" autocomplete="off"/>
+        </div>
       </div>
-
-      <div class="stop-list" id="alight-stop-list">
-        <!-- populated by JS -->
-      </div>
+      <div class="stop-list" id="alight-stop-list"></div>
     </div>
 
-    <!-- STEP 3: Bus results -->
+    <!-- STEP 3: Bus list -->
     <div class="panel-section hidden" id="section-buses">
       <div class="step-header">
         <div class="step-badge">3</div>
-        <span>Available Buses</span>
+        <span data-i18n="step3_title">Available Buses</span>
       </div>
-
-      <div class="selected-stop-row" style="margin-bottom:6px">
-        <div class="sel-dot" style="background:#e74c3c"></div>
-        <div style="flex:1">
-          <div class="sel-label">From</div>
-          <div class="sel-name" id="from-label">—</div>
+      <div class="journey-pills">
+        <div class="selected-stop-pill red" style="margin-bottom:6px">
+          <div class="pill-dot"></div>
+          <div class="pill-text">
+            <div class="pill-label" data-i18n="from_label">From</div>
+            <div class="pill-name" id="from-label">—</div>
+          </div>
+        </div>
+        <div class="pills-connector"></div>
+        <div class="selected-stop-pill green">
+          <div class="pill-dot"></div>
+          <div class="pill-text">
+            <div class="pill-label" data-i18n="to_label">To</div>
+            <div class="pill-name" id="to-label">—</div>
+          </div>
+          <button class="pill-change" onclick="resetToStep2()" data-i18n="change_btn">Change</button>
         </div>
       </div>
-      <div class="selected-stop-row" style="margin-bottom:14px">
-        <div class="sel-dot" style="background:#27ae60"></div>
-        <div style="flex:1">
-          <div class="sel-label">To</div>
-          <div class="sel-name" id="to-label">—</div>
-        </div>
-        <button class="change-btn" onclick="resetToStep2()">Change</button>
-      </div>
-
-      <div id="bus-results"><!-- populated by JS --></div>
+      <div id="bus-results"></div>
     </div>
 
-    <!-- STEP 4: Journey details -->
+    <!-- STEP 4: ETA -->
     <div class="panel-section hidden" id="section-eta">
       <div class="step-header">
         <div class="step-badge">4</div>
-        <span>Your Journey</span>
+        <span data-i18n="step4_title">Your Journey</span>
       </div>
-      <div id="eta-result"><!-- populated by JS --></div>
+      <div id="eta-result"></div>
+    </div>
+
+    <!-- BUS ANIMATION STATUS (shown when bus is animating) -->
+    <div class="anim-status hidden" id="anim-status">
+      <div class="anim-bus-icon">🚌</div>
+      <div class="anim-text">
+        <div class="anim-title">Bus is on its way</div>
+        <div class="anim-sub" id="anim-sub">Simulating live movement…</div>
+      </div>
+      <div class="anim-pulse"></div>
     </div>
 
   </div>
 
-  <!-- ===== MAP ===== -->
-  <div class="map-container">
+  <!-- ===== MAP AREA ===== -->
+  <div class="dash-map-area">
+
+    <!-- Map stats bar above map -->
+    <div class="map-stats-bar" id="map-stats-bar">
+      <div class="msb-item">
+        <div class="msb-icon">🚦</div>
+        <div>
+          <div class="msb-label">Traffic</div>
+          <div class="msb-val" id="msb-traffic">—</div>
+        </div>
+      </div>
+      <div class="msb-item">
+        <div class="msb-icon">🕐</div>
+        <div>
+          <div class="msb-label">Current Time</div>
+          <div class="msb-val" id="msb-time">—</div>
+        </div>
+      </div>
+      <div class="msb-item">
+        <div class="msb-icon">📍</div>
+        <div>
+          <div class="msb-label">Active Route</div>
+          <div class="msb-val" id="msb-route">Select stops</div>
+        </div>
+      </div>
+      <div class="msb-item">
+        <div class="msb-icon">⏱️</div>
+        <div>
+          <div class="msb-label">ETA</div>
+          <div class="msb-val" id="msb-eta">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP -->
     <div id="map"></div>
 
+    <!-- Map legend -->
     <div class="map-legend">
-      <div class="leg-item"><div class="leg-dot" style="background:#e74c3c"></div> Board here</div>
-      <div class="leg-item"><div class="leg-dot" style="background:#27ae60"></div> Get off here</div>
-      <div class="leg-item"><div class="leg-dot" style="background:#3498db"></div> Bus stop</div>
-      <div class="leg-item"><div class="leg-line"></div> Bus route</div>
+      <div class="leg-item"><div class="leg-dot red-dot"></div><span data-i18n="leg_board">Board here</span></div>
+      <div class="leg-item"><div class="leg-dot green-dot"></div><span data-i18n="leg_alight">Get off here</span></div>
+      <div class="leg-item"><div class="leg-dot grey-dot"></div><span data-i18n="leg_stop">Bus stop</span></div>
+      <div class="leg-item"><div class="leg-line-sample"></div><span data-i18n="leg_route">Bus route</span></div>
+      <div class="leg-item"><span style="font-size:14px">🚌</span><span>Live bus</span></div>
     </div>
 
-    <div class="traffic-badge" id="traffic-badge">
-      <span id="traffic-label">—</span>
-    </div>
   </div>
-
-</div><!-- end tracker-layout -->
+</div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="i18n.js"></script>
 <script src="buses.js"></script>
 <script src="script.js"></script>
 </body>
