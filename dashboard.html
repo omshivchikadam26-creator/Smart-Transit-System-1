@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Live Tracker – PuneRide</title>
+  <title>Live Tracker – Smart Transit System</title>
   <link rel="stylesheet" href="style.css"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 </head>
 <body class="dashboard-body">
 
-<!-- TOP BAR -->
 <div class="top-bar">
   <div class="top-bar-inner">
-    <span class="helpline">हेल्पलाइन क्रमांक: <strong>020-24546262</strong></span>
+    <span class="helpline"><span data-i18n="helpline">Helpline No:</span> <strong>020-24546262</strong></span>
     <div class="lang-switcher top-lang">
       <button class="lang-btn active" data-lang="en" onclick="setLang('en')">English</button>
       <button class="lang-btn" data-lang="hi" onclick="setLang('hi')">हिन्दी</button>
@@ -22,14 +21,13 @@
   </div>
 </div>
 
-<!-- HEADER -->
 <header class="site-header dash-header">
   <div class="header-inner">
     <div class="brand">
       <div class="brand-logo">🚌</div>
       <div class="brand-text">
-        <div class="brand-name">PuneRide</div>
-        <div class="brand-sub" data-i18n="hero_badge">PUNE CITY BUS — SMART ETA SYSTEM</div>
+        <div class="brand-name" data-i18n="system_name">Smart Transit System</div>
+        <div class="brand-sub" data-i18n="system_sub">PUNE CITY BUS — AI ETA SYSTEM</div>
       </div>
     </div>
     <nav class="main-nav">
@@ -41,19 +39,16 @@
   </div>
 </header>
 
-<!-- DASHBOARD LAYOUT -->
 <div class="dash-layout">
 
-  <!-- ===== LEFT PANEL ===== -->
   <div class="dash-left" id="left-panel">
 
-    <!-- Panel header strip -->
     <div class="panel-top-strip">
       <span class="panel-top-icon">🗺️</span>
-      <span data-i18n="nav_tracker">Live Bus Tracker</span>
+      <span data-i18n="panel_title">Live Bus Tracker</span>
     </div>
 
-    <!-- STEP 1: Board -->
+    <!-- STEP 1 -->
     <div class="panel-section" id="section-board">
       <div class="step-header">
         <div class="step-badge">1</div>
@@ -74,7 +69,7 @@
       <div class="stop-list" id="board-stop-list"></div>
     </div>
 
-    <!-- STEP 2: Alight -->
+    <!-- STEP 2 -->
     <div class="panel-section hidden" id="section-alight">
       <div class="step-header">
         <div class="step-badge">2</div>
@@ -100,7 +95,7 @@
       <div class="stop-list" id="alight-stop-list"></div>
     </div>
 
-    <!-- STEP 3: Bus list -->
+    <!-- STEP 3 -->
     <div class="panel-section hidden" id="section-buses">
       <div class="step-header">
         <div class="step-badge">3</div>
@@ -127,7 +122,7 @@
       <div id="bus-results"></div>
     </div>
 
-    <!-- STEP 4: ETA -->
+    <!-- STEP 4 -->
     <div class="panel-section hidden" id="section-eta">
       <div class="step-header">
         <div class="step-badge">4</div>
@@ -136,65 +131,60 @@
       <div id="eta-result"></div>
     </div>
 
-    <!-- BUS ANIMATION STATUS (shown when bus is animating) -->
+    <!-- Animation status -->
     <div class="anim-status hidden" id="anim-status">
       <div class="anim-bus-icon">🚌</div>
       <div class="anim-text">
-        <div class="anim-title">Bus is on its way</div>
-        <div class="anim-sub" id="anim-sub">Simulating live movement…</div>
+        <div class="anim-title" data-i18n="anim_title">Bus is on its way</div>
+        <div class="anim-sub" id="anim-sub"></div>
       </div>
       <div class="anim-pulse"></div>
     </div>
 
   </div>
 
-  <!-- ===== MAP AREA ===== -->
+  <!-- MAP AREA -->
   <div class="dash-map-area">
-
-    <!-- Map stats bar above map -->
     <div class="map-stats-bar" id="map-stats-bar">
       <div class="msb-item">
         <div class="msb-icon">🚦</div>
         <div>
-          <div class="msb-label">Traffic</div>
+          <div class="msb-label" data-i18n="msb_traffic">Traffic</div>
           <div class="msb-val" id="msb-traffic">—</div>
         </div>
       </div>
       <div class="msb-item">
         <div class="msb-icon">🕐</div>
         <div>
-          <div class="msb-label">Current Time</div>
+          <div class="msb-label" data-i18n="msb_time">Current Time</div>
           <div class="msb-val" id="msb-time">—</div>
         </div>
       </div>
       <div class="msb-item">
         <div class="msb-icon">📍</div>
         <div>
-          <div class="msb-label">Active Route</div>
-          <div class="msb-val" id="msb-route">Select stops</div>
+          <div class="msb-label" data-i18n="msb_route">Active Route</div>
+          <div class="msb-val" id="msb-route" data-i18n="select_stops">Select stops</div>
         </div>
       </div>
       <div class="msb-item">
         <div class="msb-icon">⏱️</div>
         <div>
-          <div class="msb-label">ETA</div>
+          <div class="msb-label" data-i18n="msb_eta">ETA</div>
           <div class="msb-val" id="msb-eta">—</div>
         </div>
       </div>
     </div>
 
-    <!-- MAP -->
     <div id="map"></div>
 
-    <!-- Map legend -->
     <div class="map-legend">
       <div class="leg-item"><div class="leg-dot red-dot"></div><span data-i18n="leg_board">Board here</span></div>
       <div class="leg-item"><div class="leg-dot green-dot"></div><span data-i18n="leg_alight">Get off here</span></div>
       <div class="leg-item"><div class="leg-dot grey-dot"></div><span data-i18n="leg_stop">Bus stop</span></div>
       <div class="leg-item"><div class="leg-line-sample"></div><span data-i18n="leg_route">Bus route</span></div>
-      <div class="leg-item"><span style="font-size:14px">🚌</span><span>Live bus</span></div>
+      <div class="leg-item"><span style="font-size:14px">🚌</span><span data-i18n="leg_live">Live bus</span></div>
     </div>
-
   </div>
 </div>
 

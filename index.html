@@ -3,16 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PuneRide – Smart Bus ETA</title>
+  <title>Smart Transit System – Pune</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 </head>
 <body>
-
-<!-- TOP BAR -->
 <div class="top-bar">
   <div class="top-bar-inner">
-    <span class="helpline">हेल्पलाइन क्रमांक: <strong>020-24546262</strong></span>
+    <span class="helpline"><span data-i18n="helpline">Helpline No:</span> <strong>020-24546262</strong></span>
     <div class="lang-switcher">
       <button class="lang-btn active" data-lang="en" onclick="setLang('en')">English</button>
       <button class="lang-btn" data-lang="hi" onclick="setLang('hi')">हिन्दी</button>
@@ -21,14 +19,13 @@
   </div>
 </div>
 
-<!-- HEADER -->
 <header class="site-header">
   <div class="header-inner">
     <div class="brand">
       <div class="brand-logo">🚌</div>
       <div class="brand-text">
-        <div class="brand-name">PuneRide</div>
-        <div class="brand-sub" data-i18n="hero_badge">PUNE CITY BUS — SMART ETA SYSTEM</div>
+        <div class="brand-name" data-i18n="system_name">Smart Transit System</div>
+        <div class="brand-sub" data-i18n="system_sub">PUNE CITY BUS — AI ETA SYSTEM</div>
       </div>
     </div>
     <nav class="main-nav">
@@ -40,32 +37,29 @@
   </div>
 </header>
 
-<!-- NEWS TICKER -->
 <div class="ticker-bar">
-  <div class="ticker-label">बातम्या</div>
+  <div class="ticker-label" data-i18n="nav_home">बातम्या</div>
   <div class="ticker-wrap">
     <div class="ticker-content">
+      <span class="tick-item" data-i18n="system_name">Smart Transit System</span>
+      <span class="new-badge">नवीन</span>
       <span class="tick-item">Bus 101: Shivajinagar ↔ Swargate — दर 15 मिनिटांनी</span>
       <span class="new-badge">नवीन</span>
       <span class="tick-item">Bus 155: Katraj ↔ Hadapsar — दर 20 मिनिटांनी</span>
       <span class="new-badge">नवीन</span>
-      <span class="tick-item">Bus 50: Wakad ↔ Kothrud — दर 25 मिनिटांनी</span>
+      <span class="tick-item">Bus A1: Alandi ↔ Pune Station — दर 30 मिनिटांनी</span>
       <span class="new-badge">नवीन</span>
-      <span class="tick-item">GPS-based stop detection now available · Use 📍 in Live Tracker</span>
-      <span class="new-badge">नवीन</span>
-      <span class="tick-item">Smart ETA with peak-hour traffic patterns · AI-powered predictions</span>
+      <span class="tick-item">GPS-based stop detection · Use 📍 in Live Tracker</span>
     </div>
   </div>
 </div>
 
-<!-- HERO SLIDER -->
 <section class="hero-slider">
   <div class="slide active" id="slide-0">
-    <img src="image1.jpg" alt="Pune Bus" class="slide-img"
-         onerror="this.style.background='#1a5c2a';this.alt='';"/>
+    <img src="image1.jpg" alt="Pune Bus" class="slide-img" onerror="this.style.background='#1a5c2a';this.alt='';"/>
     <div class="slide-overlay">
       <div class="slide-caption">
-        <div class="slide-badge" data-i18n="hero_badge">PUNE CITY BUS</div>
+        <div class="slide-badge" data-i18n="hero_badge">PUNE CITY BUS — AI ETA SYSTEM</div>
         <h1 data-i18n="hero_h1_line1">Know exactly when</h1>
         <h2 data-i18n="hero_h1_line2">your bus arrives.</h2>
         <p data-i18n="hero_p">AI-powered ETA using real schedules and live Pune traffic patterns.</p>
@@ -74,19 +68,17 @@
     </div>
   </div>
   <div class="slide" id="slide-1">
-    <img src="image2.jfif" alt="Pune Bus Route" class="slide-img"
-         onerror="this.style.background='#0d3d1f';this.alt='';"/>
+    <img src="image2.jfif" alt="Pune Bus Route" class="slide-img" onerror="this.style.background='#0d3d1f';this.alt='';"/>
     <div class="slide-overlay">
       <div class="slide-caption">
-        <div class="slide-badge">स्मार्ट बस ट्रॅकर</div>
-        <h1>Smart · Fast · Reliable</h1>
-        <h2>पुणे बस ट्रॅकर</h2>
-        <p>बस स्टॉप निवडा आणि ETA जाणून घ्या</p>
-        <a href="dashboard.html" class="slide-cta">लाइव्ह ट्रॅकर →</a>
+        <div class="slide-badge" data-i18n="system_sub">स्मार्ट ट्रान्झिट सिस्टम</div>
+        <h1 data-i18n="system_name">Smart Transit System</h1>
+        <h2 data-i18n="hero_h1_line2">your bus arrives.</h2>
+        <p data-i18n="hero_p">AI-powered ETA using real schedules and live Pune traffic patterns.</p>
+        <a href="dashboard.html" class="slide-cta" data-i18n="hero_btn_open">Open Live Tracker →</a>
       </div>
     </div>
   </div>
-
   <button class="slide-arrow prev" onclick="changeSlide(-1)">&#10094;</button>
   <button class="slide-arrow next" onclick="changeSlide(1)">&#10095;</button>
   <div class="slide-dots">
@@ -95,51 +87,47 @@
   </div>
 </section>
 
-<!-- STATS CARDS -->
 <section class="stats-section">
   <div class="stats-row">
     <div class="stat-card">
       <div class="stat-icon-box"><span>🚌</span></div>
-      <div>
-        <div class="stat-label" data-i18n="stat_routes">Sample Routes</div>
-        <div class="stat-num">3</div>
-      </div>
+      <div><div class="stat-label" data-i18n="stat_routes">Bus Routes</div><div class="stat-num">3</div></div>
     </div>
     <div class="stat-card">
       <div class="stat-icon-box"><span>🚏</span></div>
-      <div>
-        <div class="stat-label" data-i18n="stat_stops">Bus Stops</div>
-        <div class="stat-num">19</div>
-      </div>
+      <div><div class="stat-label" data-i18n="stat_stops">Bus Stops</div><div class="stat-num">19</div></div>
     </div>
     <div class="stat-card">
       <div class="stat-icon-box"><span>📍</span></div>
-      <div>
-        <div class="stat-label" data-i18n="stat_gps">GPS Assist</div>
-        <div class="stat-num">Live</div>
-      </div>
+      <div><div class="stat-label" data-i18n="stat_gps">GPS Assist</div><div class="stat-num">Live</div></div>
     </div>
     <div class="stat-card">
       <div class="stat-icon-box"><span>🧠</span></div>
-      <div>
-        <div class="stat-label">ML Model</div>
-        <div class="stat-num">Active</div>
-      </div>
+      <div><div class="stat-label">ML Model</div><div class="stat-num">Active</div></div>
     </div>
     <div class="stat-card">
       <div class="stat-icon-box"><span>🚦</span></div>
-      <div>
-        <div class="stat-label">Traffic Zones</div>
-        <div class="stat-num">3</div>
-      </div>
+      <div><div class="stat-label">Traffic Zones</div><div class="stat-num">3</div></div>
     </div>
   </div>
 </section>
 
-<!-- ROUTES -->
+<section class="features-section">
+  <div class="section-heading">
+    <h2 data-i18n="tracker_features">Live Tracker Features</h2>
+    <div class="heading-bar"></div>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card"><div class="feat-icon">🚏</div><h3 data-i18n="feat1_title">Pick Your Stop</h3><p data-i18n="feat1_p">Search from the stop list or use GPS to detect the nearest stop.</p></div>
+    <div class="feat-card"><div class="feat-icon">🚌</div><h3 data-i18n="feat2_title">Available Buses Only</h3><p data-i18n="feat2_p">Only buses that connect your two stops are shown.</p></div>
+    <div class="feat-card"><div class="feat-icon">🧠</div><h3 data-i18n="feat3_title">Smart ETA</h3><p data-i18n="feat3_p">Peak-hour traffic patterns adjust your ETA automatically.</p></div>
+    <div class="feat-card"><div class="feat-icon">🗺️</div><h3 data-i18n="feat4_title">Route on Map</h3><p data-i18n="feat4_p">Active route highlighted with boarding and alighting stops marked.</p></div>
+  </div>
+</section>
+
 <section class="routes-section">
   <div class="section-heading">
-    <h2>Available Bus Routes</h2>
+    <h2 data-i18n="available_routes">Available Bus Routes</h2>
     <div class="heading-bar"></div>
   </div>
   <div class="routes-grid">
@@ -147,63 +135,60 @@
       <div class="route-badge" style="background:#e74c3c">101</div>
       <div class="route-body">
         <div class="route-name">Shivajinagar ↔ Swargate</div>
-        <div class="route-meta">6 stops · Every 15 min</div>
+        <div class="route-meta">6 <span data-i18n="route_stops">stops</span> · <span data-i18n="route_every">Every</span> 15 <span data-i18n="route_min">min</span></div>
         <div class="route-stops">Shivajinagar → FC Road → Deccan → Nal Stop → Dandekar Bridge → Swargate</div>
       </div>
-      <a href="dashboard.html" class="route-track-btn">Track →</a>
+      <a href="dashboard.html" class="route-track-btn" data-i18n="route_track">Track →</a>
     </div>
     <div class="route-card">
       <div class="route-badge" style="background:#8e44ad">155</div>
       <div class="route-body">
         <div class="route-name">Katraj ↔ Hadapsar</div>
-        <div class="route-meta">7 stops · Every 20 min</div>
+        <div class="route-meta">7 <span data-i18n="route_stops">stops</span> · <span data-i18n="route_every">Every</span> 20 <span data-i18n="route_min">min</span></div>
         <div class="route-stops">Katraj → Bibwewadi → Swargate → Market Yard → Pune Station → Ghorpadi → Hadapsar</div>
       </div>
-      <a href="dashboard.html" class="route-track-btn">Track →</a>
+      <a href="dashboard.html" class="route-track-btn" data-i18n="route_track">Track →</a>
     </div>
     <div class="route-card">
-      <div class="route-badge" style="background:#27ae60">50</div>
+      <div class="route-badge" style="background:#e67e22">A1</div>
       <div class="route-body">
-        <div class="route-name">Wakad ↔ Kothrud Depot</div>
-        <div class="route-meta">6 stops · Every 25 min</div>
-        <div class="route-stops">Wakad → Baner → Aundh IT Park → Parihar Chowk → Karve Road → Kothrud Depot</div>
+        <div class="route-name">Alandi ↔ Pune Station</div>
+        <div class="route-meta">6 <span data-i18n="route_stops">stops</span> · <span data-i18n="route_every">Every</span> 30 <span data-i18n="route_min">min</span></div>
+        <div class="route-stops">Alandi → Chakan Phata → Dighi Depot → Vishrantwadi → Dhole Patil Road → Pune Station</div>
       </div>
-      <a href="dashboard.html" class="route-track-btn">Track →</a>
+      <a href="dashboard.html" class="route-track-btn" data-i18n="route_track">Track →</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-col">
-      <div class="footer-brand">🚌 PuneRide</div>
+      <div class="footer-brand">🚌 <span data-i18n="system_name">Smart Transit System</span></div>
       <p data-i18n="footer_built">Built with Flask · Leaflet · ML · 2026</p>
       <p data-i18n="footer_demo">Demo Project · PMPML Inspired</p>
     </div>
     <div class="footer-col">
-      <h4>Quick Links</h4>
+      <h4 data-i18n="quick_links">Quick Links</h4>
       <a href="index.html" data-i18n="nav_home">Home</a>
       <a href="dashboard.html" data-i18n="nav_tracker">Live Tracker</a>
       <a href="about.html" data-i18n="nav_about">About</a>
       <a href="help.html" data-i18n="nav_help">Help</a>
     </div>
     <div class="footer-col">
-      <h4>Bus Routes</h4>
+      <h4 data-i18n="bus_routes_lbl">Bus Routes</h4>
       <a href="dashboard.html">Bus 101 — Shivajinagar ↔ Swargate</a>
       <a href="dashboard.html">Bus 155 — Katraj ↔ Hadapsar</a>
-      <a href="dashboard.html">Bus 50 — Wakad ↔ Kothrud</a>
+      <a href="dashboard.html">Bus A1 — Alandi ↔ Pune Station</a>
     </div>
     <div class="footer-col">
-      <h4>Contact</h4>
-      <p>हेल्पलाइन: 020-24546262</p>
+      <h4 data-i18n="contact_lbl">Contact</h4>
+      <p>020-24546262</p>
       <p>Pune, Maharashtra</p>
-      <p>PMPML Inspired Demo</p>
+      <p data-i18n="footer_demo">Demo Project · PMPML Inspired</p>
     </div>
   </div>
-  <div class="footer-bottom">
-    © 2026 PuneRide · Smart Bus ETA System · Demo Project
-  </div>
+  <div class="footer-bottom">© 2026 <span data-i18n="system_name">Smart Transit System</span></div>
 </footer>
 
 <script src="i18n.js"></script>
@@ -211,15 +196,12 @@
 let cur = 0;
 const slides = document.querySelectorAll('.slide');
 const dots   = document.querySelectorAll('.dot');
-
 function goSlide(n) {
-  slides[cur].classList.remove('active');
-  dots[cur].classList.remove('active');
-  cur = (n + slides.length) % slides.length;
-  slides[cur].classList.add('active');
-  dots[cur].classList.add('active');
+  slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
+  cur = (n+slides.length)%slides.length;
+  slides[cur].classList.add('active'); dots[cur].classList.add('active');
 }
-function changeSlide(d) { goSlide(cur + d); }
+function changeSlide(d) { goSlide(cur+d); }
 setInterval(() => changeSlide(1), 5000);
 </script>
 </body>
